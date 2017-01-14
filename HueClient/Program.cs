@@ -11,6 +11,11 @@ namespace HueClient
         static void Main(string[] args)
         {
             Console.WriteLine("welcome");
+            Light room = new Light("A1");
+
+            Console.WriteLine(room.Name);
+
+            Console.ReadLine();
         }
     }
 }
