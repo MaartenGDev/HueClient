@@ -8,11 +8,13 @@ namespace HueClient
 {
     class Light
     {
-        public String Name;
+        private String Name;
+        private LightState State;
 
-        public Light(String name)
+        public Light(String name, LightState state)
         {
             Name = name;
+            State = state;
         }
     }
 }

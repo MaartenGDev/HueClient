@@ -10,10 +10,12 @@ namespace HueClient
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("welcome");
-            Light room = new Light("A1");
+            HueUser user = new HueUser("token");
+            HttpClient http = new HttpClient();
 
-            Console.WriteLine(room.Name);
+            Hue hue = new Hue(http, user);
+
+            hue.AllLights();
 
             Console.ReadLine();
         }
