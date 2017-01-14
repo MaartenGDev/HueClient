@@ -21,8 +21,6 @@ namespace HueClient
 
             string responseFromServer = reader.ReadToEnd();
 
-
-
             reader.Close();
             dataStream.Close();
             response.Close();

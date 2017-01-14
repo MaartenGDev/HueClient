@@ -11,7 +11,6 @@ namespace HueClient
     {
         private HttpClient Http;
         private HueUser User;
-        private Lights Lights;
 
         public Hue(HttpClient http, HueUser user)
         {
@@ -26,12 +25,23 @@ namespace HueClient
 
             String response = Http.Get($"http://{apiHost}/api/{apiToken}/lights");
 
- 
-            JObject allTracks = JObject.Parse(response);
+            Lights lightCollection = new Lights();
 
-            Console.WriteLine(allTracks);
+            IEnumerable<object> lights = JObject.Parse(response);
 
-            return Lights;
+            foreach(JProperty lightProperty in lights)
+            {
+                String key = lightProperty.Name;
+                JObject light = (JObject)lightProperty.Value;
+
+                JObject state = (JObject)light["state"];
+                LightState lightState = new LightState((int) state["bri"], (int)state["hue"], (int) state["sat"]);
+
+                lightCollection.AddLight(new Light(Http, (string) key,(String) light["name"], lightState));
+
+            }
+
+            return lightCollection;
         }
     }
 }
