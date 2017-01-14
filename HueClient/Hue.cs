@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace HueClient
     {
         private HttpClient Http;
         private HueUser User;
-        private List<Light> Lights;
+        private Lights Lights;
 
         public Hue(HttpClient http, HueUser user)
         {
@@ -18,8 +19,18 @@ namespace HueClient
             User = user;
         }
 
-        public List<Light> AllLights()
+        public Lights AllLights()
         {
+            String apiToken = User.Token;
+            String apiHost = User.Host;
+
+            String response = Http.Get($"http://{apiHost}/api/{apiToken}/lights");
+
+ 
+            JObject allTracks = JObject.Parse(response);
+
+            Console.WriteLine(allTracks);
+
             return Lights;
         }
     }

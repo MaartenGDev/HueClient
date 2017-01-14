@@ -8,11 +8,13 @@ namespace HueClient
 {
     class HueUser
     {
-        public String Token { get; set; }
+        public String Token;
+        public String Host;
 
-        public HueUser(String token)
+        public HueUser(String token, String host)
         {
             Token = token;
+            Host = host;
         }
     }
 }

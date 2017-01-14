@@ -10,12 +10,12 @@ namespace HueClient
     {
         static void Main(string[] args)
         {
-            HueUser user = new HueUser("token");
+            HueUser user = new HueUser("secure", "192.168.1.1");
             HttpClient http = new HttpClient();
 
             Hue hue = new Hue(http, user);
 
-            hue.AllLights();
+            Lights lights = hue.AllLights();
 
             Console.ReadLine();
         }
