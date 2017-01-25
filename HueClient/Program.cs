@@ -10,8 +10,8 @@ namespace HueClient
     {
         static void Main(string[] args)
         {
-            HueUser user = new HueUser("token", "192.168.1.1");
-            HttpClient http = new HttpClient();
+            HueUser user = new HueUser("i3xooZyH9up22k-zOUbVyWYv9RWTB7B3pfEIWPuM", "192.168.2.21");
+            HttpClient http = new HttpClient(user);
 
             Hue hue = new Hue(http, user);
 
@@ -19,8 +19,7 @@ namespace HueClient
 
             foreach (Light light in lights)
             {
-                light.SetUser(user);
-                light.State.SetHue(25500);
+                light.SetHue(25500);
             }
            
             Console.ReadLine();

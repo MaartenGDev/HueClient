@@ -10,6 +10,13 @@ namespace HueClient
 {
     class HttpClient
     {
+        private HueUser User;
+
+        public HttpClient(HueUser user)
+        {
+            User = user;
+        }
+
         public String Get(String uri)
         {
             WebRequest request = WebRequest.Create(uri);
@@ -26,6 +33,18 @@ namespace HueClient
             response.Close();
 
             return responseFromServer;
+        }
+
+        public String Put(String uri, String data)
+        {
+            using (var client = new System.Net.WebClient())
+            {
+                return client.UploadString(uri, "PUT",data);
+            }
+        }
+        public HueUser getUser()
+        {
+            return User;
         }
     }
 }
