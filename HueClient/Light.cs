@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,26 +14,32 @@ namespace HueClient
         public String Id;
         public LightState State;
         public HttpClient Http;
-        public Light(HttpClient http, String id,String name, LightState state)
+
+        public Light(HttpClient http, String id, String name)
         {
             Http = http;
             Id = id;
             Name = name;
-            State = state;
         }
 
-        public void SetHue(int value)
+        public void SetHue(int hue)
         {
             HueUser user = Http.getUser();
 
             String apiToken = user.Token;
             String apiHost = user.Host;
 
-            JObject o = new JObject();
+            LightState lightState = new LightState();
+            lightState.hue = hue;
+            lightState.bri = 100;
+            lightState.sat = 100;
 
-            String state = Http.Put($"http://{apiHost}/api/{apiToken}/lights/{Id}/state", "{\"bri\":42}");
+            String jsonState = JsonConvert.SerializeObject(lightState);
+            Console.WriteLine(jsonState);
 
-            Console.WriteLine(state);
+            String state = Http.Put($"http://{apiHost}/api/{apiToken}/lights/{Id}/state", jsonState);
+
+            //Console.WriteLine(state);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace HueClient
 
             foreach (Light light in lights)
             {
-                light.SetHue(25500);
+                light.SetHue(100);
             }
            
             Console.ReadLine();

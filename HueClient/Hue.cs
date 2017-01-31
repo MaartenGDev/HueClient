@@ -35,9 +35,8 @@ namespace HueClient
                 JObject light = (JObject)lightProperty.Value;
 
                 JObject state = (JObject)light["state"];
-                LightState lightState = new LightState((int) state["bri"], (int)state["hue"], (int) state["sat"]);
 
-                lightCollection.AddLight(new Light(Http, (string) key,(String) light["name"], lightState));
+                lightCollection.AddLight(new Light(Http, (string) key,(String) light["name"]));
 
             }
 
