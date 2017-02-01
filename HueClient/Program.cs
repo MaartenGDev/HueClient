@@ -16,11 +16,13 @@ namespace HueClient
 
             Hue hue = new Hue(http, user);
 
-            Lights lights = hue.AllLights();
+       
 
             while (hasQuestion)
             {
+                Lights lights = hue.AllLights();
 
+                Console.WriteLine("Please enter a state for the light");
                 String command = Console.ReadLine();
 
                 if(command == "stop")
@@ -33,17 +35,7 @@ namespace HueClient
 
                 foreach (Light light in lights)
                 {
-                    LightState state = light.getState();
-
-                    Console.WriteLine("Bri: " + state.Brightness);
-                    Console.WriteLine("Hue: " + state.Hue);
-                    Console.WriteLine("Sat: " + state.Saturation);
-                    Console.WriteLine("---");
-
-                    factory.Create("prod");
-
                     light.SetState(factory.Create(command));
-
                 }
             }
    

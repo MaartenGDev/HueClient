@@ -16,20 +16,29 @@ namespace HueClient
 
         private LightState GetStateForKey(String key)
         {
-            Dictionary<String, int> settings = new Dictionary<String, int>();
+            int brightness = 100;
+            int saturation = 100;
+            int hue = 100;
 
-            if(key == "prod")
+            if (key == "prod")
             {
-               return new LightState { Brightness = 77, Saturation = 251, Hue = 251 };
+                brightness = 120;
+                saturation = 120;
+                hue = 8402;
             }else if (key == "movie")
             {
-                return new LightState { Brightness = 100, Saturation = 100, Hue = 100 };
+                brightness = 100;
+                saturation = 100;
+                hue = 100;
             }else if (key == "sleep")
             {
-                return new LightState { Brightness = 50, Saturation = 6200, Hue = 251 };
+                brightness = 67;
+                saturation = 251;
+                hue = 6291;
             }
 
-            return new LightState { Brightness = 100, Saturation = 100, Hue = 100 };
+            Console.WriteLine("Setting light to " + key + " mode");
+            return new LightState { Brightness = brightness, Saturation = saturation, Hue = hue };
         }
     }
 }

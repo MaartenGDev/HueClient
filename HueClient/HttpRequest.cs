@@ -32,7 +32,6 @@ namespace HueClient
             dataStream.Close();
             response.Close();
 
-      
             return responseFromServer;
         }
 

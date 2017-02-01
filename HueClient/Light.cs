@@ -68,11 +68,13 @@ namespace HueClient
 
         public void SetState(LightState state)
         {
-            SetBri(state.Brightness);
-            SetHue(state.Hue);
-            SetSat(state.Saturation);
+            Dictionary<String, int> lightState = new Dictionary<String, int>();
 
-            State = state;
+            lightState.Add("bri", state.Brightness);
+            lightState.Add("hue", state.Hue);
+            lightState.Add("sat", state.Saturation);
+
+            ChangeLightState(lightState);
         }
 
         private void SetSat(int saturation)
