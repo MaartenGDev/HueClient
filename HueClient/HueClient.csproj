@@ -51,6 +51,7 @@
     <Compile Include="Light.cs" />
     <Compile Include="Lights.cs" />
     <Compile Include="LightState.cs" />
+    <Compile Include="LightStatusFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

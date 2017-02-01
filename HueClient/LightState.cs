@@ -8,9 +8,9 @@ namespace HueClient
 {
     class LightState
     {
-        public int hue;
-        public int bri;
-        public int sat;
+        public int Brightness { get; set; }
+        public int Saturation { get; set; }
+        public int Hue { get; set; }
 
     }
 }

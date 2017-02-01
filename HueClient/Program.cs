@@ -12,17 +12,42 @@ namespace HueClient
         {
             HueUser user = new HueUser("i3xooZyH9up22k-zOUbVyWYv9RWTB7B3pfEIWPuM", "192.168.2.21");
             HttpClient http = new HttpClient(user);
+            Boolean hasQuestion = true;
 
             Hue hue = new Hue(http, user);
 
             Lights lights = hue.AllLights();
 
-            foreach (Light light in lights)
+            while (hasQuestion)
             {
-                light.SetHue(100);
+
+                String command = Console.ReadLine();
+
+                if(command == "stop")
+                {
+                    hasQuestion = false;
+                    return;
+                }
+
+                LightStatusFactory factory = new LightStatusFactory();
+
+                foreach (Light light in lights)
+                {
+                    LightState state = light.getState();
+
+                    Console.WriteLine("Bri: " + state.Brightness);
+                    Console.WriteLine("Hue: " + state.Hue);
+                    Console.WriteLine("Sat: " + state.Saturation);
+                    Console.WriteLine("---");
+
+                    factory.Create("prod");
+
+                    light.SetState(factory.Create(command));
+
+                }
             }
-           
-            Console.ReadLine();
+   
+
         }
     }
 }
